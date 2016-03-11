@@ -32,7 +32,7 @@ import java.lang.reflect.Method;
 public class CircuitBreakerInterceptor implements Interceptor {
 
     private CircuitBreakerManager circuitBreakerManager;
-
+    //TODO: Ser the circuit Breaker Manager parameters from annotation
     public CircuitBreakerInterceptor() {
         circuitBreakerManager = new CircuitBreakerManager(5, 5000);
     }
