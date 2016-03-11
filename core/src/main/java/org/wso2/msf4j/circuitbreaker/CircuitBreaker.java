@@ -50,7 +50,7 @@ public class CircuitBreaker {
         if (isClosed() && (failureCounter.get() >= threshold)) {
             this.status = CircuitStatus.OPEN;
             startTimeoutTask();
-        } else if (isHalfOpen()) {  // if the status is halfopen, then move the circuit to open state and start the time out timer.
+        } else if (isHalfOpen()) {  // if the status is halfopen, then move the circuit to open state and start timer.
             this.status = CircuitStatus.OPEN;
             startTimeoutTask();
         }
