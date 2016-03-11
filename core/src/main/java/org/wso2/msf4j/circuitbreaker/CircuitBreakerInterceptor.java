@@ -53,7 +53,7 @@ public class CircuitBreakerInterceptor implements Interceptor {
     @Override
     public void postCall(Request request, int status, ServiceMethodInfo serviceMethodInfo) throws Exception {
         Method method = serviceMethodInfo.getMethod();
-        //heck for failures with status code 5XX.
+        //check for failures with status code 5XX.
         if (status >= 500 && status < 600) {
             circuitBreakerManager.addResourceFailure(method);
         } else {

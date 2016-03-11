@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class CircuitBreaker {
 
-    private AtomicLong failureCounter;     //Failure counter list to hold the list of failures with their timestamp.
+    private AtomicLong failureCounter;     //Failure counter to store the failures
     private long timeout;                  //Timeout value in milliseconds
     private long threshold;                //Max number of failures
     private Timer timeoutTimer;
