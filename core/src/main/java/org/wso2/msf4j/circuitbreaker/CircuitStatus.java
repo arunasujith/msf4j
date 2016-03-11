@@ -15,6 +15,9 @@
  */
 package org.wso2.msf4j.circuitbreaker;
 
+/**
+ * Circuit Status enum represent the three status which circuit breaker class can occupy.
+ */
 public enum CircuitStatus {
     CLOSED, OPEN, HALF_OPEN
 }
