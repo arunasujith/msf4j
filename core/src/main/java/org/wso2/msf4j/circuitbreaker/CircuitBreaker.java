@@ -47,6 +47,7 @@ public class CircuitBreaker {
 
     public synchronized void update() {
         //if the status is closed and threshold exceed set the circuit open and start the timeout timer.
+        failureCounter.incrementAndGet();
         if (isClosed() && (failureCounter.get() >= threshold)) {
             this.status = CircuitStatus.OPEN;
             startTimeoutTask();
