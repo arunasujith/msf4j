@@ -26,7 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class CircuitBreakerManager {
 
-    private Map<Method, CircuitBreaker> methodCircuitMap;
+    private Map<Method, Circuit> methodCircuitMap;
     private long maxFailures;
     private long timeout;
 
@@ -43,14 +43,14 @@ public class CircuitBreakerManager {
     }
 
     public synchronized void addResourceFailure(Method method) {
-        CircuitBreaker circuitBreaker;
+        Circuit circuit;
         if (methodCircuitMap.containsKey(method)) {
-            circuitBreaker = methodCircuitMap.get(method);
+            circuit = methodCircuitMap.get(method);
         } else {
-            circuitBreaker = new CircuitBreaker(maxFailures, timeout);
-            methodCircuitMap.put(method, circuitBreaker);
+            circuit = new Circuit(maxFailures, timeout);
+            methodCircuitMap.put(method, circuit);
         }
-        circuitBreaker.update();
+        circuit.update();
     }
 
     public synchronized boolean isCircuitOpen(Method method) {
