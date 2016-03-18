@@ -84,7 +84,7 @@ public class MetricsInterceptor implements Interceptor {
                 Timed annotation = method.getAnnotation(Timed.class);
                 String name = buildName(annotation.name(), annotation.absolute(), method);
                 Level level = annotation.level();
-                Timer timer = MetricManager.timer(toLevel(level), name);
+                Timer timer = MetricManager.timer(name, toLevel(level));
                 Interceptor interceptor = new TimerInterceptor(timer);
                 interceptors = new HashSet<>();
                 interceptors.add(interceptor);
@@ -94,7 +94,7 @@ public class MetricsInterceptor implements Interceptor {
                 Metered annotation = method.getAnnotation(Metered.class);
                 String name = buildName(annotation.name(), annotation.absolute(), method);
                 Level level = annotation.level();
-                Meter meter = MetricManager.meter(toLevel(level), name);
+                Meter meter = MetricManager.meter(name, toLevel(level));
                 Interceptor interceptor = new MeterInterceptor(meter);
                 if (interceptors == null) {
                     interceptors = new HashSet<>();
@@ -106,7 +106,7 @@ public class MetricsInterceptor implements Interceptor {
                 Counted annotation = method.getAnnotation(Counted.class);
                 String name = buildName(annotation.name(), annotation.absolute(), method);
                 Level level = annotation.level();
-                Counter counter = MetricManager.counter(toLevel(level), name);
+                Counter counter = MetricManager.counter(name, toLevel(level));
                 Interceptor interceptor = new CounterInterceptor(counter, annotation.monotonic());
                 if (interceptors == null) {
                     interceptors = new HashSet<>();
