@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.wso2.msf4j.circuitbreaker;
+package org.wso2.msf4j.analytics.circuitbreaker;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -27,28 +27,21 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CircuitBreakerManager {
 
     private Map<Method, Circuit> methodCircuitMap;
-    private long maxFailures;
-    private long timeout;
 
     /**
-     * Initialize the circuit manager with max failure count and the timeout values.
-     *
-     * @param maxFailures the number of maximum failures in a given timeout window.
-     * @param timeout     the timeout value to the circuit to be stay closed in milliseconds.
+     * Initialize the circuit manager.
      */
-    public CircuitBreakerManager(long maxFailures, long timeout) {
+    public CircuitBreakerManager() {
         methodCircuitMap = new ConcurrentHashMap<>();
-        this.maxFailures = maxFailures;
-        this.timeout = timeout;
     }
 
-    public synchronized void addResourceFailure(Method method) {
+    public synchronized void markFailure(ResourceInfo resourceInfo) {
         Circuit circuit;
-        if (methodCircuitMap.containsKey(method)) {
-            circuit = methodCircuitMap.get(method);
+        if (methodCircuitMap.containsKey(resourceInfo.getMethod())) {
+            circuit = methodCircuitMap.get(resourceInfo.getMethod());
         } else {
-            circuit = new Circuit(maxFailures, timeout);
-            methodCircuitMap.put(method, circuit);
+            circuit = new Circuit(resourceInfo);
+            methodCircuitMap.put(resourceInfo.getMethod(), circuit);
         }
         circuit.update();
     }

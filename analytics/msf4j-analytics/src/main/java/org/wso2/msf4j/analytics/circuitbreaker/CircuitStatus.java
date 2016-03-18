@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.wso2.msf4j.circuitbreaker;
+package org.wso2.msf4j.analytics.circuitbreaker;
 
 /**
  * Circuit Status enum represent the three status which circuit breaker class can occupy.

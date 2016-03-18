@@ -39,7 +39,7 @@ public final class Metrics {
     private Metrics() {
     }
 
-    static synchronized void init(MetricReporter... metricReporters) {
+    public static synchronized void init(MetricReporter... metricReporters) {
         if (metricService != null) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Metric Service is already initialized");
@@ -84,7 +84,7 @@ public final class Metrics {
         MetricManager.registerMXBean();
     }
 
-    static synchronized void destroy() {
+    public static synchronized void destroy() {
         if (metricService != null) {
             MetricManager.unregisterMXBean();
             metricService.disable();

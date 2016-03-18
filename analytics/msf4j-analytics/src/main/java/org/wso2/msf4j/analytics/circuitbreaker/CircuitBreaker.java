@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.wso2.msf4j.circuitbreaker;
+package org.wso2.msf4j.analytics.circuitbreaker;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -32,6 +32,8 @@ import java.lang.annotation.Target;
 @Target({ ElementType.TYPE, ElementType.METHOD })
 public @interface CircuitBreaker {
 
+    String name() default "";
+
     /**
      * RateType Enum values.
      */
@@ -41,5 +43,7 @@ public @interface CircuitBreaker {
 
     RateType ratetype() default RateType.ONE_MINUTE;
 
-    double threshold() default 0D;
+    long threshold() default 0L;
+
+    long timeout() default 0L;
 }
